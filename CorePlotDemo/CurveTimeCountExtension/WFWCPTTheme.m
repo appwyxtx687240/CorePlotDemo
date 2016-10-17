@@ -18,9 +18,9 @@
     graph.fill = [CPTFill fillWithColor:[CPTColor colorWithCGColor:[UIColor whiteColor].CGColor]];
     
     //2.边距
-    graph.paddingLeft   = CPTFloat(0);
+    graph.paddingLeft   = CPTFloat(5);
     graph.paddingTop    = CPTFloat(10);
-    graph.paddingRight  = CPTFloat(0);
+    graph.paddingRight  = CPTFloat(5);
     graph.paddingBottom = CPTFloat(10.0);
 }
 
@@ -75,6 +75,7 @@
     //    x.majorGridLineStyle = xLineStyle;
     //(3)主刻度的样式
     y.majorTickLineStyle = yLineStyle;
+
     //(4)x轴横轴样式
     y.axisLineStyle = yLineStyle;
     y.labelTextStyle = whiteTextStyle;

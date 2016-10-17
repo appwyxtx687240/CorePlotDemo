@@ -19,7 +19,7 @@
 #define LINECOLOR 0xffd432
 
 //主体线条小圆点颜色
-#define HIGHBLOODLINECOLOR 0x3dd7af
+#define ScoreLINECOLOR 0x3dd7af
 
 
 @interface ZJPlotScoreCell ()<CPTPlotDataSource,CPTAxisDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -66,7 +66,8 @@
     self.subjectPoints = [NSMutableArray new];
     self.industryPoints = [NSMutableArray new];
 
-    self.tableView.tableFooterView = [[UIView alloc]init];
+    [self setFooterView];
+
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 44.0f;
 }
@@ -96,19 +97,20 @@
 
     self.briefLabel.text = subjectScore.score_card_brief;
     self.scoreLabel.text = [NSString stringWithFormat:@"%@ (%@)", subjectScore.score_card_titile, subjectScore.score_card_value];
+
     NSMutableArray *xValues  = [NSMutableArray new];
     NSMutableArray *yValues  = [NSMutableArray new];
-
+    //准备X轴数据
     NSArray *xModels = [subjectScore.line_charge valueForKey:@"line_charge_x"];
     for (ZJLineChargeXModel *xModel in xModels) {
         [xValues addObject:xModel.x_name];
     }
-
+    //准备Y轴数据
     NSArray *yModels = [[subjectScore.line_charge valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
     for (ZJValueListModel *yModel in yModels) {
         [yValues addObject:yModel.y_value];
     }
-
+    //创建坐标数组
     for (NSString *key in xValues) {
         NSInteger index = [xValues indexOfObject:key];
         NSDictionary *dic = @{@"xValue":key, @"yValue":yValues[index]};
@@ -118,29 +120,32 @@
     NSLog(@"%@", subjectScore);
 
     [self loadSoreGraph];
-
 }
 
+
+/**
+ 画图
+ */
 -(void)loadSoreGraph {
     // 设置图纸视图
-    [self setupGraphViewOfHighBlood];
+    [self setupGraphViewOfScore];
 
     // 设置图形空间
     // 一屏暂展示0-4共五个数据
-    [self setupSpaceOfHighBloodWithXOfPlotSpaceToLeft:60 * 60 * 12
+    [self setupSpaceOfScoreWithXOfPlotSpaceToLeft:60 * 60 * 12
                               withXOfPlotSpaceToRight:60 * 60 *12
                            withTimesOfLeftSpaceToPlot:0.25
                           withTimesOfRightSpaceToPlot:0.25
                                  withIndexOfStartData:0
                                    withIndexOfEndData:4
                                      withYOriginPoint:0
-                               withYOriginToScreenTop:90
+                               withYOriginToScreenTop:160
                             withYOriginToScreenBottom:20
                                withXSlideSpaceToRight:60 * 60 * 24 * 5
                                       withXStringName:@"xValue"
                                       withYStringName:@"yValue"];
     // 设置坐标轴
-    [self setupAxisViewOfHighBloodWithYStepLength:20
+    [self setupAxisViewOfScoreWithYStepLength:20
                       withXAxisConstraintToBottom:25
                         withYAxisConstraintToLeft:25
                   withYMinStartPointOfExceptPoint:-50
@@ -149,17 +154,17 @@
                     withYMaxEndPointOfExceptPoint:200];
 
     // 设置自定义x轴坐标值
-    [self setupCustomXLocationOfHighBloodWithPointDataArray:self.subjectPoints
+    [self setupCustomXLocationOfScoreWithPointDataArray:self.subjectPoints
                                             withXStringName:@"xValue"
                                             withYStringName:@"yValue"];
     // 设置折线图
-    [self setupPlotViewOfHighBlood];
+    [self setupPlotViewOfScore];
 
 
 }
 
 #pragma mark-设置评分曲线图纸视图
-- (void)setupGraphViewOfHighBlood
+- (void)setupGraphViewOfScore
 {
     //2.图纸设置
     //2.1 宿主视图初始化(使用IB生成)
@@ -174,7 +179,7 @@
 }
 
 #pragma mark-设置评分曲线图形空间
-- (void)setupSpaceOfHighBloodWithXOfPlotSpaceToLeft:(double)xOfPlotSpaceToLeft     //一个点时折线图距离左边距的距离
+- (void)setupSpaceOfScoreWithXOfPlotSpaceToLeft:(double)xOfPlotSpaceToLeft     //一个点时折线图距离左边距的距离
                             withXOfPlotSpaceToRight:(double)xOfPlotSpaceToRight    //一个点折线图距离右边距的距离
                          withTimesOfLeftSpaceToPlot:(double)timesOfLeftSpaceToPlot //多个点时"折线图距离左边的距离"与"折线图宽度"的比例
                         withTimesOfRightSpaceToPlot:(double)timesOfRightSpaceToPlot//多个点时"折线图距离左边的距离"与"折线图宽
@@ -182,7 +187,7 @@
                                  withIndexOfEndData:(NSInteger)indexOfEnd          //折线图一屏显示的数据终点下标数
                                    withYOriginPoint:(double)yOriginPoint           //Y轴原点纵坐标
                              withYOriginToScreenTop:(double)yOriginToScreenTop     //Y轴原点纵坐标距离顶部边缘距离
-                          withYOriginToScreenBottom:(double)yOriginToScreenBottom  //Y轴原点纵坐标距离顶部边缘距离
+                          withYOriginToScreenBottom:(double)yOriginToScreenBottom  //Y轴原点纵坐标距离底部边缘距离
                              withXSlideSpaceToRight:(double)xSlideSpaceToRight     //X轴向右边多滑动的范围
                                     withXStringName:(NSString *)xStringName        // 折线图X轴字段名称
                                     withYStringName:(NSString *)yStringName        // 折线图Y轴字段名称
@@ -318,7 +323,7 @@
 }
 
 #pragma mark -设置评分曲线坐标轴基本设置
-- (void)setupAxisViewOfHighBloodWithYStepLength:(float)yStepLength                 // Y轴步长
+- (void)setupAxisViewOfScoreWithYStepLength:(float)yStepLength                 // Y轴步长
                     withXAxisConstraintToBottom:(CGFloat)xAxisConstraintToBottom   // X轴距离视图底部的约束长度
                       withYAxisConstraintToLeft:(CGFloat)yAxisConstraintToLeft     // Y轴距离视图左边的约束长度
                 withYMinStartPointOfExceptPoint:(float)yMinStartPoint              // Y轴需要排除的点的范围_最小值起点
@@ -352,7 +357,7 @@
 
     //4.1.1设置y轴与x轴交点(y坐标位置)
     //设置x坐标的原点（y轴将在此与x轴相交,即如果填2,则y轴2和x轴0点相交）
-    //    x.orthogonalPosition = [NSNumber numberWithFloat:YAXISTOXAXISYPOINT];
+//    x.orthogonalPosition = [NSNumber numberWithFloat:0];
 
     //图形空间和x/y轴交点不一定相关,只是这里让图形空间和坐标轴交点保持一致了
 
@@ -399,7 +404,7 @@
 }
 
 #pragma mark -设置评分曲线自定义x轴坐标值
-- (void)setupCustomXLocationOfHighBloodWithPointDataArray:(NSMutableArray *)pointDataArray // 折线图数据点数组
+- (void)setupCustomXLocationOfScoreWithPointDataArray:(NSMutableArray *)pointDataArray // 折线图数据点数组
                                           withXStringName:(NSString *)xStringName          // 折线图X轴字段名称
                                           withYStringName:(NSString *)yStringName          // 折线图Y轴字段名称
 {
@@ -448,7 +453,7 @@
 }
 
 #pragma mark -设置评分曲线折线图
-- (void)setupPlotViewOfHighBlood
+- (void)setupPlotViewOfScore
 {
     //5.散点图类
 
@@ -570,7 +575,6 @@
      *  例如:x.majorTickLocations = majorTickLocations;
      *
      */
-
     CPTXYAxisSet *xyAxisSet = (CPTXYAxisSet *)axis.axisSet;
     CPTXYAxis *x = xyAxisSet.xAxis;
     CPTXYAxis *y = xyAxisSet.yAxis;
@@ -583,7 +587,6 @@
         NSMutableSet *newLabels = [NSMutableSet set];
         for (NSDecimalNumber *tickLocation in locations)
         {
-
             /**数据*/
             //NSNumber转NSString
             NSString *labelIntervalString = [NSString stringWithFormat:@"%@",tickLocation];
@@ -612,6 +615,8 @@
         axis.axisLabels = newLabels;
     }else if ([axis isEqual:y])
     {
+        locations = [NSSet setWithArray:@[@(20),@(40),@(60),@(80),@(100)]];
+
         //在设置y.delegate = self;(给y轴设置代理)后,可以在这里分别定制y轴label样式
         NSMutableSet *newLabels = [NSMutableSet set];
         for (NSDecimalNumber *tickLocation in locations)
@@ -637,13 +642,10 @@
             
             //添加到新的"标签位置容器"里
             [newLabels addObject:newLabel];
-            
-            
         }
         
         //"坐标轴标签位置"指向新的容器
         axis.axisLabels = newLabels;
-        
     }
     
     //告诉系统不用添加系统标签,走这个方法自定义标签
@@ -671,6 +673,27 @@
     return cell;
 }
 
+-(void)setFooterView {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44)];
+    UIButton *checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    checkBtn.frame = CGRectMake((view.frame.size.width - 300)/2, (view.frame.size.height - 40)/2, 200, 40);
+    checkBtn.center = view.center;
+    checkBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [checkBtn setTitle:@"点击查看该主体所有债券" forState:UIControlStateNormal];
+    [checkBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [checkBtn addTarget:self action:@selector(checkBondList:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:checkBtn];
 
+
+    UILabel *lineLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, view.frame.size.width - 30, 0.5)];
+    lineLabel.backgroundColor = [UIColor grayColor];
+    [view addSubview:lineLabel];
+
+    self.tableView.tableFooterView = view;
+}
+
+-(void)checkBondList:(UIButton *)sender {
+    NSLog(@"该主体所有债券");
+}
 
 @end
