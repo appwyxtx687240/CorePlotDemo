@@ -18,9 +18,9 @@
     graph.fill = [CPTFill fillWithColor:[CPTColor colorWithCGColor:[UIColor whiteColor].CGColor]];
     
     //2.边距
-    graph.paddingLeft   = CPTFloat(10.0);
-    graph.paddingTop    = CPTFloat(80.0);
-    graph.paddingRight  = CPTFloat(10.0);
+    graph.paddingLeft   = CPTFloat(0);
+    graph.paddingTop    = CPTFloat(10);
+    graph.paddingRight  = CPTFloat(0);
     graph.paddingBottom = CPTFloat(10.0);
 }
 
@@ -68,6 +68,7 @@
     CPTMutableLineStyle *yLineStyle = [CPTMutableLineStyle lineStyle];
     yLineStyle.lineWidth = 1.0;
     yLineStyle.lineColor = [CPTColor lightGrayColor];
+
     //(1)小刻度的样式(minor较小的,Tick标记)
     //    y.minorTickLineStyle = xLineStyle;
     //(2)网格的样式
@@ -82,8 +83,6 @@
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [numberFormatter setMaximumFractionDigits:0];
     y.labelFormatter = numberFormatter;
-    
-  
 }
 
 

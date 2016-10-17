@@ -35,9 +35,9 @@
                 <constraints>
                     <constraint firstItem="spw-jJ-Ean" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="8i8-xz-3wt"/>
                     <constraint firstItem="u1e-ec-GvB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="9Lh-3k-fZh"/>
-                    <constraint firstItem="spw-jJ-Ean" firstAttribute="leading" secondItem="t2Z-6k-JVe" secondAttribute="trailing" constant="121" id="QrK-Iz-Zzj"/>
                     <constraint firstItem="t2Z-6k-JVe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="RLe-eI-WoL"/>
                     <constraint firstItem="u1e-ec-GvB" firstAttribute="top" secondItem="t2Z-6k-JVe" secondAttribute="bottom" constant="8" id="aLF-Jr-OXW"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="t2Z-6k-JVe" secondAttribute="trailing" constant="150" id="gFI-9X-6Gd"/>
                     <constraint firstAttribute="bottom" secondItem="u1e-ec-GvB" secondAttribute="bottom" constant="7.5" id="gc2-Jo-F6o"/>
                     <constraint firstItem="t2Z-6k-JVe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="gz0-dO-Ofs"/>
                     <constraint firstItem="u1e-ec-GvB" firstAttribute="top" secondItem="spw-jJ-Ean" secondAttribute="bottom" constant="8" id="oL0-gy-YPd"/>
@@ -45,6 +45,11 @@
                     <constraint firstAttribute="trailing" secondItem="u1e-ec-GvB" secondAttribute="trailing" constant="8" id="wmP-ZM-kgO"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="briefLabel" destination="u1e-ec-GvB" id="ad8-dB-h6P"/>
+                <outlet property="scoreLabel" destination="spw-jJ-Ean" id="c9i-wg-2jj"/>
+                <outlet property="subTitleLabel" destination="t2Z-6k-JVe" id="vqL-2d-6cg"/>
+            </connections>
             <point key="canvasLocation" x="-142.5" y="-45.5"/>
         </tableViewCell>
     </objects>

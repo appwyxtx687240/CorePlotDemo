@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZJSubjectScoreModel.h"
 
 @interface ZJSubScoreCell : UITableViewCell
 
+/**
+ 评分模型
+ */
+@property (strong, nonatomic) ZJSubjectScoreModel *score;
 @end

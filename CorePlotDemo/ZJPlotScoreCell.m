@@ -66,6 +66,7 @@
     self.subjectPoints = [NSMutableArray new];
     self.industryPoints = [NSMutableArray new];
 
+    self.tableView.tableFooterView = [[UIView alloc]init];
 }
 
 -(ZJSubjectScoreModel *)setData {
@@ -130,20 +131,20 @@
                           withTimesOfRightSpaceToPlot:0.25
                                  withIndexOfStartData:0
                                    withIndexOfEndData:4
-                                     withYOriginPoint:40
+                                     withYOriginPoint:0
                                withYOriginToScreenTop:90
                             withYOriginToScreenBottom:20
                                withXSlideSpaceToRight:60 * 60 * 24 * 5
                                       withXStringName:@"xValue"
                                       withYStringName:@"yValue"];
     // 设置坐标轴
-    [self setupAxisViewOfHighBloodWithYStepLength:10
+    [self setupAxisViewOfHighBloodWithYStepLength:20
                       withXAxisConstraintToBottom:25
                         withYAxisConstraintToLeft:25
-                  withYMinStartPointOfExceptPoint:20
-                    withYMinEndPointOfExceptPoint:40
-                  withYMaxStartPointOfExceptPoint:141
-                    withYMaxEndPointOfExceptPoint:241];
+                  withYMinStartPointOfExceptPoint:-50
+                    withYMinEndPointOfExceptPoint:0
+                  withYMaxStartPointOfExceptPoint:100
+                    withYMaxEndPointOfExceptPoint:200];
 
     // 设置自定义x轴坐标值
     [self setupCustomXLocationOfHighBloodWithPointDataArray:self.subjectPoints
@@ -645,8 +646,6 @@
     
     //告诉系统不用添加系统标签,走这个方法自定义标签
     return NO;
-    
-    
 }
 
 #pragma mark - UITableViewDataSource
