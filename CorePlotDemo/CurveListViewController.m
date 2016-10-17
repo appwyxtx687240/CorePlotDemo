@@ -10,8 +10,8 @@
 #import "WFWCPTTheme.h"
 #import "NSString+WFWExtension.h"
 #import "WFWCurveListViewModel.h"
-
-
+#import "ZJSubjectScoreModel.h"
+#import "ZJPlotScoreCell.h"
 
 //通用小圆点填充颜色
 #define LINECOLOR 0xffd432
@@ -20,7 +20,7 @@
 #define HIGHBLOODLINECOLOR 0x3dd7af
 
 
-@interface CurveListViewController ()
+@interface CurveListViewController ()<UITableViewDelegate, UITableViewDataSource>
 /**
  * 高血压曲线图相关属性
  */
@@ -44,6 +44,11 @@
 /**存储总下载数据的Model*/
 @property (nonatomic, strong) WFWCurveListViewModel *dataModel;
 
+/**
+
+ */
+@property (strong, nonatomic) ZJSubjectScoreModel *subjectScore;
+
 @end
 
 @implementation CurveListViewController
@@ -54,12 +59,93 @@
 
     self.view.backgroundColor = [UIColor lightGrayColor];
 
-    [self initUI];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.tableFooterView = [[UIView alloc]init];
 
-    [self downloadData];
+    tableView.estimatedRowHeight = 237.0f;
+    tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self.view addSubview:tableView];
 
+
+//    [self initUI];
+//
+//
+//    [self downloadData];
+//
+    [self setData];
 }
 
+#pragma mark - UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ZJPlotScoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZJPlotScoreCell"];
+
+    if (!cell) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"ZJPlotScoreCell" owner:nil options:nil]lastObject];
+    }
+
+    cell.subjectScore = self.subjectScore;
+
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+-(void)setData {
+
+    NSDictionary *dic = @{
+                          @"score_card_titile"  :   @"主体信用总评分",
+                          @"score_card_value"   :   @"80分",
+                          @"score_card_brief"   :   @"关于评分的几句简短说明",
+                          @"line_charge"        :   @[@{
+                                                          @"line_charge_length" :   @"5",
+                                                          @"line_charge_x" :   @[@{@"x_name":@"1464710400"}, @{@"x_name":@"1467302400"}],
+                                                          @"line_charge_dataset" :   @[@{@"value_title":@"主体评分",                                                                                @"value_list":@[@{@"y_value":@"66"},@{@"y_value":@"77"}]}],
+                                                          @"line_charge_dataset_count" :   @"5",
+                                                          }]
+
+                          };
+
+
+    ZJSubjectScoreModel *subjectScore = [[ZJSubjectScoreModel alloc]initWithDictionary:dic error:nil];
+    self.subjectScore = subjectScore;
+
+    NSMutableArray *xValues  = [NSMutableArray new];
+    NSMutableArray *yValues  = [NSMutableArray new];
+
+    NSArray *xModels = [subjectScore.line_charge[0] valueForKey:@"line_charge_x"];
+    for (ZJLineChargeXModel *xModel in xModels) {
+        [xValues addObject:xModel.x_name];
+    }
+
+    NSArray *yModels = [[subjectScore.line_charge[0] valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
+    for (ZJValueListModel *yModel in yModels) {
+        [yValues addObject:yModel.y_value];
+    }
+
+    NSMutableArray *subjectPoints = [NSMutableArray new];
+    for (NSString *key in xValues) {
+        NSInteger index = [xValues indexOfObject:key];
+        NSDictionary *dic = @{@"xValue":key, @"yValue":yValues[index]};
+        [subjectPoints addObject:dic];
+    }
+
+    NSLog(@"%@", subjectScore);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

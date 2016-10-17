@@ -7,6 +7,7 @@
 //
 
 #import "WFWCPTTheme.h"
+#import "CPTColor.h"
 
 @implementation WFWCPTTheme
 
@@ -14,8 +15,7 @@
 -(void)applyThemeToBackground:(CPTGraph *)graph
 {
     //1.背景图
-    CPTImage *image = [CPTImage imageNamed:@"tbbj"];
-    graph.fill = [CPTFill fillWithImage:image];
+    graph.fill = [CPTFill fillWithColor:[CPTColor colorWithCGColor:[UIColor whiteColor].CGColor]];
     
     //2.边距
     graph.paddingLeft   = CPTFloat(10.0);
@@ -43,7 +43,7 @@
     //设置样式
     CPTMutableLineStyle *xLineStyle = [CPTMutableLineStyle lineStyle];
     xLineStyle.lineWidth = 1.0;
-    xLineStyle.lineColor = [CPTColor whiteColor];
+    xLineStyle.lineColor = [CPTColor lightGrayColor];
     //(1)小刻度的样式(minor较小的,Tick标记)
     //    x.minorTickLineStyle = xLineStyle;
     //(2)网格的样式
@@ -67,7 +67,7 @@
     //样式
     CPTMutableLineStyle *yLineStyle = [CPTMutableLineStyle lineStyle];
     yLineStyle.lineWidth = 1.0;
-    yLineStyle.lineColor = [CPTColor whiteColor];
+    yLineStyle.lineColor = [CPTColor lightGrayColor];
     //(1)小刻度的样式(minor较小的,Tick标记)
     //    y.minorTickLineStyle = xLineStyle;
     //(2)网格的样式
