@@ -20,6 +20,7 @@
 		C80ADA991DB49A2800402E5A /* ZJSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C80ADA981DB49A2800402E5A /* ZJSubjectModel.m */; };
 		C80ADA9D1DB49CFA00402E5A /* ZJSubScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80ADA9B1DB49CFA00402E5A /* ZJSubScoreCell.m */; };
 		C80ADA9E1DB49CFA00402E5A /* ZJSubScoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C80ADA9C1DB49CFA00402E5A /* ZJSubScoreCell.xib */; };
+		C80ADAA11DB4CCCE00402E5A /* ZJLineChargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C80ADAA01DB4CCCE00402E5A /* ZJLineChargeModel.m */; };
 		C81521991DB472620099C8A1 /* CurveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C815218C1DB472620099C8A1 /* CurveListViewController.m */; };
 		C815219A1DB472620099C8A1 /* NSString+WFWExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C815218F1DB472620099C8A1 /* NSString+WFWExtension.m */; };
 		C815219B1DB472620099C8A1 /* WFWCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C81521911DB472620099C8A1 /* WFWCPTTheme.m */; };
@@ -63,6 +64,8 @@
 		C80ADA9A1DB49CFA00402E5A /* ZJSubScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSubScoreCell.h; sourceTree = "<group>"; };
 		C80ADA9B1DB49CFA00402E5A /* ZJSubScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSubScoreCell.m; sourceTree = "<group>"; };
 		C80ADA9C1DB49CFA00402E5A /* ZJSubScoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZJSubScoreCell.xib; sourceTree = "<group>"; };
+		C80ADA9F1DB4CCCE00402E5A /* ZJLineChargeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJLineChargeModel.h; sourceTree = "<group>"; };
+		C80ADAA01DB4CCCE00402E5A /* ZJLineChargeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJLineChargeModel.m; sourceTree = "<group>"; };
 		C815218B1DB472620099C8A1 /* CurveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveListViewController.h; sourceTree = "<group>"; };
 		C815218C1DB472620099C8A1 /* CurveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveListViewController.m; sourceTree = "<group>"; };
 		C815218E1DB472620099C8A1 /* NSString+WFWExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WFWExtension.h"; sourceTree = "<group>"; };
@@ -320,6 +323,8 @@
 				C81521A01DB472BA0099C8A1 /* ZJSubjectScoreModel.m */,
 				C81521C01DB472E90099C8A1 /* ZJBondModel.h */,
 				C81521C11DB472E90099C8A1 /* ZJBondModel.m */,
+				C80ADA9F1DB4CCCE00402E5A /* ZJLineChargeModel.h */,
+				C80ADAA01DB4CCCE00402E5A /* ZJLineChargeModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				C81521991DB472620099C8A1 /* CurveListViewController.m in Sources */,
 				C81521B71DB472D40099C8A1 /* JSONModel+CoreData.m in Sources */,
 				C8094EFC1DACC55D00AE6D06 /* AppDelegate.m in Sources */,
+				C80ADAA11DB4CCCE00402E5A /* ZJLineChargeModel.m in Sources */,
 				C8094EF91DACC55D00AE6D06 /* main.m in Sources */,
 				C815219E1DB472620099C8A1 /* NSString+FSExtension.m in Sources */,
 				C815219B1DB472620099C8A1 /* WFWCPTTheme.m in Sources */,

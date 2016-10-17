@@ -7,7 +7,7 @@
 //
 
 #import "JSONModel.h"
-#import "ZJBondModel.h"
+#import "ZJLineChargeModel.h"
 
 /**
  总体评分模型
@@ -30,7 +30,7 @@
 /**
  图表数据，是历史评分，用来画折线图
  */
-@property (strong, nonatomic) NSArray<ZJLineChargeModel, Optional> *line_charge;
+@property (strong, nonatomic) ZJLineChargeModel<Optional> *line_charge;
 
 
 @end

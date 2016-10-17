@@ -33,28 +33,3 @@
 @end
 
 
-@implementation ZJLineChargeDatasetModel
-
-
-@end
-
-@implementation ZJValueListModel
-
-@end
-
-@implementation ZJLineChargeModel
-
-
-@end
-
-@implementation ZJLineChargeXModel
-
-
-@end
-
-
-@implementation ZJLittleGradeModel
-
-
-@end
-

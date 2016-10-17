@@ -67,6 +67,8 @@
     self.industryPoints = [NSMutableArray new];
 
     self.tableView.tableFooterView = [[UIView alloc]init];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 44.0f;
 }
 
 -(ZJSubjectScoreModel *)setData {
@@ -74,7 +76,7 @@
     NSDictionary *dic = @{
                           @"score_card_titile"  :   @"主体信用总评分",
                           @"score_card_value"   :   @"80分",
-                          @"score_card_brief"   :   @"关于评分的几句简短说明",
+                          @"score_card_brief"   :   @"关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明",
                           @"line_charge"        :   @[@{
                                                           @"line_charge_length" :   @"5",
                                                           @"line_charge_x" :   @[@{@"x_name":@"1464710400"}, @{@"x_name":@"1467302400"}],
@@ -97,12 +99,12 @@
     NSMutableArray *xValues  = [NSMutableArray new];
     NSMutableArray *yValues  = [NSMutableArray new];
 
-    NSArray *xModels = [subjectScore.line_charge[0] valueForKey:@"line_charge_x"];
+    NSArray *xModels = [subjectScore.line_charge valueForKey:@"line_charge_x"];
     for (ZJLineChargeXModel *xModel in xModels) {
         [xValues addObject:xModel.x_name];
     }
 
-    NSArray *yModels = [[subjectScore.line_charge[0] valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
+    NSArray *yModels = [[subjectScore.line_charge valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
     for (ZJValueListModel *yModel in yModels) {
         [yValues addObject:yModel.y_value];
     }

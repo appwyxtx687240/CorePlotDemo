@@ -63,7 +63,7 @@
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.tableFooterView = [[UIView alloc]init];
-
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 237.0f;
     tableView.rowHeight = UITableViewAutomaticDimension;
     
@@ -110,13 +110,13 @@
     NSDictionary *dic = @{
                           @"score_card_titile"  :   @"主体信用总评分",
                           @"score_card_value"   :   @"80分",
-                          @"score_card_brief"   :   @"关于评分的几句简短说明",
-                          @"line_charge"        :   @[@{
+                          @"score_card_brief"   :   @"关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明关于评分的几句简短说明",
+                          @"line_charge"        :   @{
                                                           @"line_charge_length" :   @"5",
                                                           @"line_charge_x" :   @[@{@"x_name":@"1464710400"}, @{@"x_name":@"1467302400"}],
                                                           @"line_charge_dataset" :   @[@{@"value_title":@"主体评分",                                                                                @"value_list":@[@{@"y_value":@"66"},@{@"y_value":@"77"}]}],
                                                           @"line_charge_dataset_count" :   @"5",
-                                                          }]
+                                                          }
 
                           };
 
@@ -127,12 +127,12 @@
     NSMutableArray *xValues  = [NSMutableArray new];
     NSMutableArray *yValues  = [NSMutableArray new];
 
-    NSArray *xModels = [subjectScore.line_charge[0] valueForKey:@"line_charge_x"];
+    NSArray *xModels = [subjectScore.line_charge valueForKey:@"line_charge_x"];
     for (ZJLineChargeXModel *xModel in xModels) {
         [xValues addObject:xModel.x_name];
     }
 
-    NSArray *yModels = [[subjectScore.line_charge[0] valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
+    NSArray *yModels = [[subjectScore.line_charge valueForKey:@"line_charge_dataset"][0]valueForKey:@"value_list"];
     for (ZJValueListModel *yModel in yModels) {
         [yValues addObject:yModel.y_value];
     }
